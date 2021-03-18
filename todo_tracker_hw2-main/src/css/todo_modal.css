@@ -1,0 +1,56 @@
+.modal {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: var(--black);
+    color: var(--swatch-text);
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    font-family: var(--font-primary);
+}
+
+.modal.is_visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-button {
+    
+}
+
+.modal_dialog {
+    position: relative;
+    max-width: 800px;
+    max-height: 80vh;
+    border-radius: 5px;
+    background: var(--swatch-complement);
+    overflow: auto;
+    cursor: default;
+}
+
+.modal_dialog > * {
+    padding: 1rem;
+}
+
+.modal_header,
+.modal_footer {
+    background: var(--lightgray);
+}
+
+.modal_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: dotted;
+}
+
+.modal_header .modal_close {
+    font-size: 1.5rem;
+}
+
+.modal p + p {
+    margin-top: 1rem;
+}
