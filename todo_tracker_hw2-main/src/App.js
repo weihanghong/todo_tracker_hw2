@@ -125,12 +125,23 @@ class App extends Component {
     localStorage.setItem("recent_work", toDoListsString);
   }
 
+  //deleting function for now, can't open modal
   openModal = () => {
-    
+    let newListList = [];
+    let oldListList = this.state.toDoLists;
+    for(let i = 1; i<oldListList.length; i++){
+    newListList.push(oldListList[i]);
+    }
+    this.setState ({
+      toDoLists: newListList,
+      currentList: {items: []}
+    }, this.afterToDoListsChangeComplete);
   }
 
   closeList = () => {
-
+    this.setState ({
+      currentList: {items: []}
+    });
   }
 
   render() {
@@ -148,6 +159,7 @@ class App extends Component {
           confirmDeleteCallback={this.openModal}
           closeListCallback={this.closeList}
         />
+        
       </div>
     );
   }
