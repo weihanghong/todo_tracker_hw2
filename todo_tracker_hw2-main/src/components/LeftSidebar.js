@@ -15,9 +15,9 @@ class LeftSidebar extends Component {
     render() {
         return (
             <div id="left-sidebar">
-                <div id="left-sidebar-header" class="section-header">
-                    <span class="left-sidebar-header-text">Todolists</span>
-                    <span class="left-sidebar-controls" id="add-undo-redo-box">
+                <div id="left-sidebar-header" className="section-header">
+                    <span className="left-sidebar-header-text">Todolists</span>
+                    <span className="left-sidebar-controls" id="add-undo-redo-box">
                         <AddBox 
                             id="add-list-button"
                             className="material-icons todo_button"

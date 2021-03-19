@@ -7,10 +7,10 @@ import jsTPS from './common/jsTPS'
 import Navbar from './components/Navbar'
 import LeftSidebar from './components/LeftSidebar'
 import Workspace from './components/Workspace'
-{/*import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
+import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
 import ItemsListComponent from './components/ItemsListComponent'
 import ListsComponent from './components/ListsComponent'
-*/}
+
 class App extends Component {
   constructor(props) {
     // ALWAYS DO THIS FIRST
@@ -85,6 +85,19 @@ class App extends Component {
     }, this.afterToDoListsChangeComplete);
   }
 
+  addItem = () => {
+    let newItem = this.makeNewToDoListItem();
+    let newItemList = this.state.currentList;
+    newItemList.items.push(newItem);
+    let newItemListList = this.state.toDoLists;
+    newItemListList.splice(0, 1, newItemList);
+    this.setState ({
+      toDoLists:newItemListList,
+      currentList: newItemList,
+      nextListItemId: this.state.nextListItemId+1
+    }, this.afterToDoListsChangeComplete);
+  }
+
   makeNewToDoList = () => {
     let newToDoList = {
       id: this.highListId,
@@ -112,6 +125,14 @@ class App extends Component {
     localStorage.setItem("recent_work", toDoListsString);
   }
 
+  openModal = () => {
+    
+  }
+
+  closeList = () => {
+
+  }
+
   render() {
     let items = this.state.currentList.items;
     return (
@@ -122,7 +143,11 @@ class App extends Component {
           loadToDoListCallback={this.loadToDoList}
           addNewListCallback={this.addNewList}
         />
-        <Workspace toDoListItems={items} />
+        <Workspace toDoListItems={items} 
+          addItemCallback={this.addItem}
+          confirmDeleteCallback={this.openModal}
+          closeListCallback={this.closeList}
+        />
       </div>
     );
   }
