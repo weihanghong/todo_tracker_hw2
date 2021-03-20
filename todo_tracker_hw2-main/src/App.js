@@ -87,16 +87,18 @@ class App extends Component {
   }
 
   addItem = () => {
-    let newItem = this.makeNewToDoListItem();
-    let newItemList = this.state.currentList;
-    newItemList.items.push(newItem);
-    let newItemListList = this.state.toDoLists;
-    newItemListList.splice(0, 1, newItemList);
-    this.setState ({
-      toDoLists:newItemListList,
-      currentList: newItemList,
-      nextListItemId: this.state.nextListItemId+1
-    }, this.afterToDoListsChangeComplete);
+    if(this.state.currentList.id!=null){
+      let newItem = this.makeNewToDoListItem();
+      let newItemList = this.state.currentList;
+      newItemList.items.push(newItem);
+      let newItemListList = this.state.toDoLists;
+      newItemListList.splice(0, 1, newItemList);
+      this.setState ({
+        toDoLists:newItemListList,
+        currentList: newItemList,
+        nextListItemId: this.state.nextListItemId+1
+      }, this.afterToDoListsChangeComplete);
+    }
   }
 
   makeNewToDoList = () => {
@@ -128,15 +130,17 @@ class App extends Component {
 
   //deleting function for now, can't open modal
   openModal = () => {
-    let newListList = [];
-    let oldListList = this.state.toDoLists;
-    for(let i = 1; i<oldListList.length; i++){
-    newListList.push(oldListList[i]);
+    if(this.state.currentList.id!=null){
+      let newListList = [];
+      let oldListList = this.state.toDoLists;
+      for(let i = 1; i<oldListList.length; i++){
+      newListList.push(oldListList[i]);
+      }
+      this.setState ({
+        toDoLists: newListList,
+        currentList: {items: []}
+      }, this.afterToDoListsChangeComplete);
     }
-    this.setState ({
-      toDoLists: newListList,
-      currentList: {items: []}
-    }, this.afterToDoListsChangeComplete);
   }
 
   closeList = () => {
