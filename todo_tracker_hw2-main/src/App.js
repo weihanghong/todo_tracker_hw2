@@ -7,6 +7,7 @@ import jsTPS from './common/jsTPS'
 import Navbar from './components/Navbar'
 import LeftSidebar from './components/LeftSidebar'
 import Workspace from './components/Workspace'
+import ToDoItem from './components/ToDoItem'
 import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
 import ItemsListComponent from './components/ItemsListComponent'
 import ListsComponent from './components/ListsComponent'
@@ -144,6 +145,65 @@ class App extends Component {
     });
   }
 
+  moveUp = (toDoListItem) => {
+    let oldList = this.state.currentList.items;
+    let newList = [];
+    let x = 0;
+    if(oldList[0]!==toDoListItem){
+      for(let i = x+1; i<oldList.length; i++){
+        if(oldList[i]===toDoListItem){
+          break;
+        }
+        newList.push(oldList[x]);
+        x++;
+      }
+      newList.push(toDoListItem);
+      newList.push(oldList[x]);
+      for(let i = x+2; i<oldList.length; i++){
+        newList.push(oldList[i]);
+      }
+      let newCurrent = this.state.currentList;
+      newCurrent.items = newList;
+      this.setState({
+        currentList: newCurrent
+      });
+    }
+  }
+
+  moveDown = (toDoListItem) => {
+    let oldList = this.state.currentList.items;
+    let newList = [];
+    let x = 0;
+    if(oldList[oldList.length-1]!==toDoListItem){
+      for(let i = x; i<oldList.length; i++){
+        x++;
+        if(oldList[i]===toDoListItem){
+          break;
+        }
+        newList.push(oldList[i]);
+      }
+      newList.push(oldList[x]);
+      newList.push(toDoListItem);
+      for(let i = x+1; i<oldList.length; i++){
+        newList.push(oldList[i]);
+      }
+      let newCurrent = this.state.currentList;
+      newCurrent.items = newList;
+      this.setState({
+        currentList: newCurrent
+      });
+    }
+  }
+
+  removeItem = (toDoListItem) => {
+    
+  }
+
+  changeName = (toDoList) => {
+    toDoList.name = <textarea type='text' placeholder={toDoList.name}></textarea>;
+    
+  }
+
   render() {
     let items = this.state.currentList.items;
     return (
@@ -153,11 +213,15 @@ class App extends Component {
           toDoLists={this.state.toDoLists}
           loadToDoListCallback={this.loadToDoList}
           addNewListCallback={this.addNewList}
+          changeNameCallback={this.changeName}
         />
         <Workspace toDoListItems={items} 
           addItemCallback={this.addItem}
           confirmDeleteCallback={this.openModal}
           closeListCallback={this.closeList}
+          moveUpCallback={this.moveUp}
+          moveDownCallback={this.moveDown}
+          removeItemCallback={this.removeItem}
         />
         
       </div>
