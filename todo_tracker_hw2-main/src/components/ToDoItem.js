@@ -29,6 +29,16 @@ class ToDoItem extends Component {
         this.props.removeItemCallback(this.props.toDoListItem);
     }
 
+    changeColor = () => {
+        let color = document.getElementById("status-" + this.props.toDoListItem.id);
+        if(color.className==="status-complete"){
+            color.className = "status-incomplete";
+        } else {
+            color.className = "status-complete";
+        }
+    }
+
+
     render() {
         // DISPLAY WHERE WE ARE
         console.log("\t\t\tToDoItem render");
@@ -39,9 +49,15 @@ class ToDoItem extends Component {
 
         return (
             <div id={'todo-list-item-' + listItem.id} className='list-item-card'>
-                <div className='item-col task-col'>{listItem.description}</div>
-                <div className='item-col due-date-col'>{listItem.due_date}</div>
-                <div className='item-col status-col' className={statusType}>{listItem.status}</div>
+                <div className='item-col task-col'><textarea type='text' placeholder={listItem.description}></textarea></div>
+                <div className='item-col due-date-col'><input type='date' placeholder={listItem.due_date}></input></div>
+                <div className='item-col status-col'>
+                    <select id={'status-' + listItem.id} className={statusType} onChange={this.changeColor}>
+                        <option hidden selected>{listItem.status}</option>
+                        <option>incomplete</option>
+                        <option>complete</option>
+                    </select>
+                </div>
                 <div className='item-col test-4-col'></div>
                 <div className='item-col list-controls-col'>
                     <KeyboardArrowUp className='list-item-control todo-button' onClick={this.handleMoveUp}/>
