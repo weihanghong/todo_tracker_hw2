@@ -85,6 +85,10 @@
     background-color: var(--swatch-contrast);
 }
 
+.todo-list-button:focus {
+    background-color: var(--swatch-contrast);
+}
+
 .todo-button {
     cursor:pointer;
     background-color: var(--swatch-complement);
@@ -114,12 +118,13 @@
 textarea {
     background-color: transparent;
     color: var(--swatch-text);
-    border: transparent;
+    border: none;
     font-size: 16px;
     font-family: var(--font-primary);
     font-weight: 600;
     text-align: center;
     width: 90%;
+    resize: none;
 }
 
 textarea::placeholder{

@@ -217,11 +217,6 @@ class App extends Component {
     });
   }
 
-  changeName = (toDoList) => {
-    toDoList.name = <textarea type='text' placeholder={toDoList.name}></textarea>;
-    
-  }
-
   render() {
     let items = this.state.currentList.items;
     return (
@@ -231,7 +226,6 @@ class App extends Component {
           toDoLists={this.state.toDoLists}
           loadToDoListCallback={this.loadToDoList}
           addNewListCallback={this.addNewList}
-          changeNameCallback={this.changeName}
         />
         <Workspace toDoListItems={items} 
           addItemCallback={this.addItem}

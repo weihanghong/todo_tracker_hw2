@@ -18,10 +18,6 @@ class ListLink extends Component {
         this.props.loadToDoListCallback(this.props.toDoList);
     }
 
-    handleChangeName = () => {
-        this.props.changeNameCallback(this.props.toDoList);
-    }
-
     render() {
         // DISPLAY WHERE WE ARE
         console.log("\t\t\tListLink render");
@@ -29,10 +25,8 @@ class ListLink extends Component {
         return (
             <div 
                 className='todo-list-button'
-                onDoubleClick={this.handleChangeName}
                 onClick={this.handleLoadList}
-            >
-                {this.props.toDoList.name}<br />
+            ><textarea type='text' placeholder={this.props.toDoList.name}></textarea>
             </div>
         )
     }
