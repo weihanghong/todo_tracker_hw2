@@ -196,7 +196,21 @@ class App extends Component {
   }
 
   removeItem = (toDoListItem) => {
-    
+    let oldList = this.state.currentList.items;
+    let newList = [];
+    for(let i = 0; i<oldList.length; i++){
+      if(oldList[i]===toDoListItem){
+        i++;
+      }
+      if(i<oldList.length){
+        newList.push(oldList[i]);
+      }
+    }
+    let newCurrent = this.state.currentList;
+    newCurrent.items = newList;
+    this.setState({
+      currentList: newCurrent
+    });
   }
 
   changeName = (toDoList) => {
